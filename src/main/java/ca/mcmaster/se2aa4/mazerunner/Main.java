@@ -14,19 +14,19 @@ public class Main {
     public static void main(String[] args) {
         try{
             if (!(args[0].equals("-i") || args[0].equals("--input"))){
-                System.out.println("**** You forgot to specify the input with -i or --input");
-                System.out.println("** End of MazeRunner");
+                logger.info("**** You forgot to specify the input with -i or --input");
+                logger.info("** End of MazeRunner");
                 System.exit(0);
             }
         }catch(Exception e){
-            System.out.println("****ERROR: No argument given, please specify the input with -i or --input");
-            System.out.println("**ERROR: End of MazeRunner");
+            logger.info("****ERROR: No argument given, please specify the input with -i or --input");
+            logger.info("**ERROR: End of MazeRunner");
             System.exit(0);
         }
-        System.out.println("** Starting Maze Runner");
+        logger.info("** Starting Maze Runner");
         try {
             
-            System.out.println("**** Reading the maze from file " + args[0]);
+            logger.info("**** Reading the maze from file " + args[0]);
             BufferedReader reader = new BufferedReader(new FileReader(args[0]));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -40,10 +40,10 @@ public class Main {
                 System.out.print(System.lineSeparator());
             }
         } catch(Exception e) {
-            System.err.println("/!\\ An error has occured /!\\");
+            logger.error("/!\\ An error has occured /!\\");
         }
-        System.out.println("**** Computing path");
-        System.out.println("PATH NOT COMPUTED");
-        System.out.println("** End of MazeRunner");
+        logger.info("**** Computing path");
+        logger.info("PATH NOT COMPUTED");
+        logger.info("** End of MazeRunner");
     }
 }

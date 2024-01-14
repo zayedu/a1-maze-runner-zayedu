@@ -26,8 +26,8 @@ public class Main {
         logger.info("** Starting Maze Runner");
         try {
             
-            logger.info("**** Reading the maze from file " + args[0]);
-            BufferedReader reader = new BufferedReader(new FileReader(args[0]));
+            logger.info("**** Reading the maze from file " + args[1]);
+            BufferedReader reader = new BufferedReader(new FileReader(args[1]));
             String line;
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {

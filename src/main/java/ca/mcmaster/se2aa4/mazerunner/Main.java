@@ -27,6 +27,8 @@ public class Main {
             logger.info("**** Printing maze");
             try {
                 maze.printMaze();
+                MazeRunner mazeRunner = new MazeRunner();
+                mazeRunner.main();
             }catch (Exception e){
                 logger.error("Error printing maze");
             }
@@ -37,6 +39,7 @@ public class Main {
         logger.info("**** Computing path");
         logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
+
     }
     private static Configuration configure(String[] args) throws ParseException {
         Options options = new Options();

@@ -30,7 +30,7 @@ public class Main {
                 maze.printMaze();
                 maze.print2DArray(maze.create2DArray());
                 MazeRunner mazeRunner = new MazeRunner(config.mazeFile);
-                System.out.println(mazeRunner.checkPath("4W4L2F2L2F2RFFF"));
+                System.out.println(mazeRunner.checkPath(config.path));
             }catch (Exception e){
                 logger.error("Error printing maze");
                 logger.error(e.getMessage());
@@ -47,13 +47,16 @@ public class Main {
     private static Configuration configure(String[] args) throws ParseException {
         Options options = new Options();
         options.addOption("i", true, "maze input file");
+        options.addOption("p", true, "path to follow");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
         String mazeFile = cmd.getOptionValue("i");
+        String path = cmd.getOptionValue("p");
         logger.info("**** Reading the maze from file " + mazeFile);
-        return new Configuration(mazeFile);
+        logger.info("**** Reading the path from file " + path);
+          return new Configuration(mazeFile,path);
     }
 
-    private record Configuration(String mazeFile) {
+    private record Configuration(String mazeFile,String path) {
     }
 }

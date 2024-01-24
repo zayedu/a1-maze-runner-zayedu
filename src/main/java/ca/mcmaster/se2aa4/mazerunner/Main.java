@@ -30,6 +30,7 @@ public class Main {
                 maze.printMaze();
                 maze.print2DArray(maze.create2DArray());
                 MazeRunner mazeRunner = new MazeRunner(config.mazeFile);
+                //Print path
                 System.out.println(mazeRunner.checkPath(config.path));
             }catch (Exception e){
                 logger.error("Error printing maze");

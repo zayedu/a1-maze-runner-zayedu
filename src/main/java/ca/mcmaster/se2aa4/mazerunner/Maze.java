@@ -23,7 +23,7 @@ public class Maze {
                 for (int idx = 0; idx < line.length(); idx++) {
                     if (line.charAt(idx) == '#') {
                         System.out.print("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
+                    } else{
                         System.out.print("PASS ");
                     }
                 }
@@ -46,5 +46,13 @@ public class Maze {
             e.printStackTrace();
         }
         return list;
+    }
+    public void print2DArray(List<int[]> list) {
+        for (int[] row : list) {
+            for (int i : row) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
     }
 }

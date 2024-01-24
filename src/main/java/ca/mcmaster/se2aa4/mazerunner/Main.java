@@ -23,23 +23,17 @@ public class Main {
         try {
             Configuration config = configure(args);
             //Create maze from path
-            Maze maze = new Maze(config.mazeFile);
 
-            //Print maze
             logger.info("**** Printing maze");
             try {
+                Maze maze = new Maze(config.mazeFile);
                 maze.printMaze();
-                List <int[]> mazeRun = maze.create2DArray();
-
-                for (int[] row : mazeRun) {
-                    for (int i : row) {
-                        System.out.print(i + " ");
-                    }
-                    System.out.println();
-                }
-
+                maze.print2DArray(maze.create2DArray());
+                MazeRunner mazeRunner = new MazeRunner(config.mazeFile);
+                System.out.println(mazeRunner.checkPath("4W4L2F2L2F2RFFF"));
             }catch (Exception e){
                 logger.error("Error printing maze");
+                logger.error(e.getMessage());
             }
 
         } catch (Exception e) {

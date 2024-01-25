@@ -151,8 +151,76 @@ public class MazeRunner {
         return verifyPath(givenPath, false) || verifyPath(givenPath, true);
     }
     public String findPath() {
+        Maze maze = new Maze(path);
+        List<int[]> mazearr = maze.create2DArray();
+        String correctPath = "";
+        int x = 0;
+        int y = findStart(true);
+        String[] directions = {"E","N","W","S"};
+        String direction = directions[0];
 
-        return null;
+        while (x < mazearr.size()-1){
+            switch (direction) {
+                case "E" -> {
+                    if (mazearr.get(y)[x + 1] == 1) {
+                        correctPath += "F";
+                        x++;
+                    } else if (mazearr.get(y + 1)[x] == 1) {
+                        correctPath += "R";
+                        direction = directions[3];
+                        y++;
+                    } else if (mazearr.get(y - 1)[x] == 1) {
+                        correctPath += "L";
+                        direction = directions[1];
+                        y--;
+                    }
+                }
+                case "N" -> {
+                    if (mazearr.get(y + 1)[x] == 1) {
+                        correctPath += "F";
+                        y++;
+                    } else if (mazearr.get(y)[x - 1] == 1) {
+                        correctPath += "R";
+                        direction = directions[2];
+                        x--;
+                    } else if (mazearr.get(y)[x + 1] == 1) {
+                        correctPath += "L";
+                        direction = directions[0];
+                        x++;
+                    }
+                }
+                case "W" -> {
+                    if (mazearr.get(y)[x - 1] == 1) {
+                        correctPath += "F";
+                        x--;
+                    } else if (mazearr.get(y - 1)[x] == 1) {
+                        correctPath += "R";
+                        direction = directions[1];
+                        y--;
+                    } else if (mazearr.get(y + 1)[x] == 1) {
+                        correctPath += "L";
+                        direction = directions[3];
+                        y++;
+                    }
+                }
+                case "S" -> {
+                    if (mazearr.get(y - 1)[x] == 1) {
+                        correctPath += "F";
+                        y--;
+                    } else if (mazearr.get(y)[x + 1] == 1) {
+                        correctPath += "R";
+                        direction = directions[0];
+                        x++;
+                    } else if (mazearr.get(y)[x - 1] == 1) {
+                        correctPath += "L";
+                        direction = directions[2];
+                        x--;
+                    }
+                }
+            }
+        }
+
+        return correctPath;
     }
 
 }

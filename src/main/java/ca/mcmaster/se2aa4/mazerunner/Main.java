@@ -56,7 +56,7 @@ public class Main {
         String path = cmd.getOptionValue("p");
         logger.info("**** Reading the maze from file " + mazeFile);
         if(path != null) logger.info("**** Reading the path " + path);
-//
+
         return new Configuration(mazeFile,path);
     }
 

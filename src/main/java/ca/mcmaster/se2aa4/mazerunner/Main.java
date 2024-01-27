@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.CommandLine;
+import org.apache.commons .cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
@@ -22,29 +22,27 @@ public class Main {
         logger.info("** Starting Maze Runner");
         try {
             Configuration config = configure(args);
-            //Create maze from path
-
-            logger.info("**** Printing maze");
             try {
-                Maze maze = new Maze(config.mazeFile);
-                maze.printMaze();
-                maze.print2DArray(maze.create2DArray());
-                MazeRunner mazeRunner = new MazeRunner(config.mazeFile);
-                //Print path
+
                 if(config.path != null) {
-                    System.out.println(mazeRunner.checkPath(config.path));
+                    Maze maze = new Maze(config.mazeFile, config.path);
+                    if(maze.verifyPath()){
+                        System.out.println("Correct path");
+                    }else{
+                        System.out.println("Incorrect path");
+                    }
+                }else{
+                    MazeRunner mazeRunner = new RightHandAlgorithm(config.mazeFile);
+                    System.out.println(mazeRunner.findPath());
                 }
-                System.out.println(mazeRunner.findPath());
+
             }catch (Exception e){
-                logger.error("Error printing maze");
-                logger.error(e.getMessage());
+                logger.error("Error accessing maze");
             }
 
         } catch (Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-        logger.info("**** Computing path");
-        logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
 
     }
@@ -57,7 +55,8 @@ public class Main {
         String mazeFile = cmd.getOptionValue("i");
         String path = cmd.getOptionValue("p");
         logger.info("**** Reading the maze from file " + mazeFile);
-        logger.info("**** Reading the path from file " + path);
+        if(path != null) logger.info("**** Reading the path " + path);
+
           return new Configuration(mazeFile,path);
     }
 

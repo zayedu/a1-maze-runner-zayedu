@@ -19,7 +19,7 @@ public class Path {
                 for (int i = 0; i < count; i++) {
                     result.append(ch);
                 }
-                digitString.setLength(0); // clear the digitString for the next number
+                digitString.setLength(0);
             }
 
         }

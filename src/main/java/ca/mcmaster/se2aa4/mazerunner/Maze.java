@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Maze {
-    private final String path;
+    private final String MazePath;
     private final String givenPath;
 
-    public Maze(String path, String givenPath) {
-        this.path= path;
+    public Maze(String MazePath, String givenPath) {
+        this.MazePath= MazePath;
         this.givenPath = givenPath;
     }
 
 
     public void printMaze() throws IOException {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
+            BufferedReader reader = new BufferedReader(new FileReader(MazePath));
             String line;
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
@@ -33,12 +33,16 @@ public class Maze {
     }
     public List<int[]> create2DArray() {
         List<int[]> list = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(MazePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 int[] row = new int[line.length()];
                 for (int i = 0; i < line.length(); i++) {
-                    row[i] = line.charAt(i) == '#' ? 0 : 1;
+                    if (line.charAt(i) == '#') {
+                        row[i] = 0;
+                    } else {
+                        row[i] = 1;
+                    }
                 }
                 list.add(row);
             }
@@ -66,7 +70,6 @@ public class Maze {
             }
         }
         else{
-
             for (int i = 0; i < mazearr.size(); i++) {
                 if (mazearr.get(i)[mazearr.size()-1] == 1) {
                     y = i;
@@ -85,7 +88,7 @@ public class Maze {
         int x;
         int y = findStart(true);
         String[] directions = {"E","N","W","S"};
-        String direction = "E";
+        String direction;
         if(east) {
             x = 0;
             direction = directions[0];
@@ -139,8 +142,9 @@ public class Maze {
             if(mazearr.get(y)[x] == 0){
                 return flag;
             }
+
             if(mazearr.get(y)[x] == 1) {
-                if (east && x == mazearr.size() - 1) {
+                if (east && x == mazearr.size()-1) {
                     flag = true;
                     return flag;
                 } else if (!east && x == 0) {

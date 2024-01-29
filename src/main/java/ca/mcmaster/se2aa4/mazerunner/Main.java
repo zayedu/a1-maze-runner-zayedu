@@ -23,7 +23,6 @@ public class Main {
         try {
             Configuration config = configure(args);
             try {
-
                 if(config.path != null) {
                     Maze maze = new Maze(config.mazeFile, config.path);
                     if(maze.verifyPath()){
@@ -38,10 +37,12 @@ public class Main {
 
             }catch (Exception e){
                 logger.error("Error accessing maze");
+                logger.error("Invalid Path to Maze File");
             }
 
         } catch (Exception e) {
             logger.error("/!\\ An error has occured /!\\");
+            logger.error("** You may have forgot to input some arguments");
         }
         logger.info("** End of MazeRunner");
 
@@ -54,7 +55,7 @@ public class Main {
         CommandLine cmd = parser.parse(options, args);
         String mazeFile = cmd.getOptionValue("i");
         String path = cmd.getOptionValue("p");
-        logger.info("**** Reading the maze from file " + mazeFile);
+        if(mazeFile != null) logger.info("**** Reading the maze from file " + mazeFile);
         if(path != null) logger.info("**** Reading the path " + path);
 
         return new Configuration(mazeFile,path);
